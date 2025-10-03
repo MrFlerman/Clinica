@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clínica Radius | Medicina Diagnóstica e Fetal</title>
+  <meta name="description" content="Clínica de ultrassonografia e medicina fetal. Atendimento humanizado com equipe experiente." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#2a7ba5;
+      --brand-2:#0f4c68;
+      --accent:#33b07a;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --bg-alt:#f8fafc;
+      --card:#ffffff;
+      --radius:16px;
+      --shadow:0 10px 25px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #e5e7eb;animation:slideDown .6s ease both}
+    @keyframes slideDown{from{transform:translateY(-12px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:44px;height:44px;border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+    .brand h1{font-size:18px;margin:0;font-weight:700;color:var(--brand)}
+
+    nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+    nav a{position:relative;font-weight:600;color:#111827;padding:8px 10px;border-radius:10px}
+    nav a:after{content:"";position:absolute;left:10px;right:10px;bottom:6px;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+    nav a:hover:after{transform:scaleX(1)}
+    .menu-btn{display:none;border:1px solid #e5e7eb;border-radius:12px;padding:8px 12px;background:#fff}
+    @media (max-width:860px){
+      nav ul{display:none}
+      .menu-btn{display:block}
+      .mobile-nav{display:none;position:absolute;left:0;right:0;top:64px;background:#fff;border-bottom:1px solid #e5e7eb}
+      .mobile-nav ul{list-style:none;margin:0;padding:12px}
+      .mobile-nav li{border-top:1px solid #f1f5f9}
+      .mobile-nav a{display:block;padding:14px 8px;color:#111827}
+    }
+
+    /* Hero animado */
+    .hero{position:relative;background:linear-gradient(0deg,#ffffff,#eef6fb);overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:-40% -20% auto -20%;height:120%;background:radial-gradient(600px 180px at 30% 20%,rgba(42,123,165,.18),transparent 60%),radial-gradient(500px 160px at 80% 10%,rgba(51,176,122,.18),transparent 60%);filter:blur(20px);animation:floatBg 12s ease-in-out infinite alternate}
+    @keyframes floatBg{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding:56px 0}
+    .hero h2{font-size:44px;line-height:1.1;margin:0 0 12px;color:#0b2c3f}
+    .hero p{font-size:18px;color:var(--muted);margin:0 0 20px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:600;border:1px solid transparent;cursor:pointer;transform:translateZ(0)}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 20px rgba(15,76,104,.22)}
+    .btn-primary:active{transform:scale(.98)}
+    .btn-ghost{background:#fff;border-color:#e5e7eb;color:#111827}
+    .btn-ghost:hover{background:#f1f5f9}
+
+    .hero-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transform:translateY(0);animation:floatCard 6s ease-in-out infinite alternate}
+    @keyframes floatCard{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+    .hero-card img{height:360px;object-fit:cover}
+    .hero-card .caption{padding:16px;color:var(--muted);font-size:14px}
+
+    /* Animações de entrada */
+    [data-animate]{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    [data-animate].is-visible{opacity:1;transform:translateY(0)}
+
+    /* Seções comuns */
+    section{padding:68px 0}
+    .section-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:24px}
+    .section-title h3{font-size:28px;margin:0}
+    .section-title p{margin:0;color:var(--muted)}
+
+    /* Grades */
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:960px){.grid-3{grid-template-columns:1fr 1fr}.grid-4{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid #eef2f7;border-radius:var(--radius);padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.03);transition:transform .2s ease, box-shadow .2s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.08)}
+    .card h4{margin:8px 0 8px}
+    .tag{display:inline-block;background:#e8f5ef;color:#1f6f52;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
+
+    .about{background:var(--bg-alt)}
+    .about .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+    @media (max-width:900px){.about .cols{grid-template-columns:1fr}}
+
+    .list{display:grid;gap:10px;margin:16px 0 0 0;padding:0;list-style:none}
+    .list li{display:flex;gap:8px;align-items:flex-start}
+    .list li span{display:inline-block;margin-top:6px;width:8px;height:8px;border-radius:999px;background:var(--accent)}
+
+    /* Destaques com imagem */
+    .service-img{height:120px;border-radius:12px;object-fit:cover;margin:-6px 0 10px 0}
+
+    /* Galeria com carrossel */
+    .carousel{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+    .slides{display:flex;width:300%;animation:slideShow 18s infinite}
+    .slides img{width:100%;height:360px;object-fit:cover}
+    @keyframes slideShow{0%{transform:translateX(0)}30%{transform:translateX(0)}33%{transform:translateX(-100%)}63%{transform:translateX(-100%)}66%{transform:translateX(-200%)}96%{transform:translateX(-200%)}100%{transform:translateX(0)}}
+
+    /* Depoimentos */
+    .quote{font-size:18px;color:#111827}
+    .quote small{display:block;margin-top:10px;color:var(--muted)}
+
+    /* Números animados */
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .stat{background:var(--card);border:1px solid #eef2f7;border-radius:16px;padding:18px;text-align:center}
+    .stat .num{font-size:30px;font-weight:800}
+    @media (max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+
+    /* Contato */
+    .contact{background:var(--bg-alt)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    @media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    input,textarea,select{padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font:inherit}
+    textarea{min-height:120px}
+
+    /* Rodapé */
+    footer{background:#0b2c3f;color:#e5e7eb}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;padding:36px 0}
+    .footer-grid h5{margin:0 0 10px;color:#fff}
+    .footer-grid a{color:#cbd5e1}
+    .sub{border-top:1px solid rgba(255,255,255,.12);padding:14px 0;font-size:14px;color:#cbd5e1}
+    @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid > div:first-child{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <img src="data:image/png;base64,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" alt="Logo da Clínica Radius" />
+        <h1>Clínica Radius</h1>
+      </div>
+      <nav aria-label="principal">
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+        <ul>
+          <li><a href="#sobre">Empresa</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#contato">Fale Conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <ul class="container">
+        <li><a href="#sobre">Empresa</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#contato">Fale Conosco</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div data-animate>
+          <h2>Ultrassonografia, Medicina Fetal e cuidado que acolhe</h2>
+          <p>Atendimento com hora marcada, equipe experiente e laudos ágeis. Sua saúde com tecnologia e atenção de perto.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contato">Agendar agora</a>
+            <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
+          </div>
+          <div class="stats" style="margin-top:18px">
+            <div class="stat"><div class="num" data-count="20">0</div><div>anos de experiência</div></div>
+            <div class="stat"><div class="num" data-count="15000">0</div><div>exames ao ano</div></div>
+            <div class="stat"><div class="num" data-count="12">0</div><div>especialistas</div></div>
+            <div class="stat"><div class="num" data-count="4.9">0</div><div>nota dos pacientes</div></div>
+          </div>
+        </div>
+        <div class="hero-card" data-animate>
+          <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?q=80&w=1200&auto=format&fit=crop" alt="Exame de ultrassom em andamento" />
+          <div class="caption">Imagem ilustrativa. Substitua por foto autorizada da sua equipe ou da clínica.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="about">
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>Sobre a empresa</h3>
+          <p>Ultrassonografia geral, Doppler colorido, Medicina Fetal e biópsias guiadas por ultrassom</p>
+        </div>
+        <div class="cols">
+          <div data-animate>
+            <p>Nossa clínica oferece exames de imagem e acompanhamento em medicina fetal, com foco em confiança, acolhimento e precisão diagnóstica. A equipe é formada por especialistas certificados e com atuação hospitalar.</p>
+            <ul class="list">
+              <li><span></span> Atendimento humanizado com sala de espera confortável</li>
+              <li><span></span> Laudos com revisão dupla e liberação rápida</li>
+              <li><span></span> Estrutura acessível, próxima ao metrô e com estacionamento</li>
+            </ul>
+          </div>
+          <div class="card" data-animate>
+            <h4>Informações rápidas</h4>
+            <p class="muted">Atendimento acolhedor com foco em precisão diagnóstica.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+              <div class="card" style="padding:12px">
+                <div class="tag">WhatsApp</div>
+                <p style="margin:6px 0 0 0">(54) 99253-6135</p>
+              </div>
+              <div class="card" style="padding:12px">
+                <div class="tag">Telefone</div>
+                <p style="margin:6px 0 0 0">(54) 3045-5700</p>
+              </div>
+              <div class="card" style="padding:12px">
+                <div class="tag">Endereço</div>
+                <p style="margin:6px 0 0 0">R. Teixeira Soares, 839, Passo Fundo RS</p>
+              </div>
+              <div class="card" style="padding:12px">
+                <div class="tag">Instagram</div>
+                <p style="margin:6px 0 0 0"><a href="https://www.instagram.com/clinica.radius" target="_blank" rel="noopener">@clinica.radius</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>Serviços e exames</h3>
+          <p>Exames com tecnologia de ponta e laudos ágeis</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop" alt="Ultrassonografia geral" />
+            <div class="tag">Ultrassom</div>
+            <h4>Ultrassonografia geral</h4>
+            <p>Exames de rotina e avaliação de órgãos e estruturas.</p>
+          </div>
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop" alt="Doppler colorido" />
+            <div class="tag">Doppler</div>
+            <h4>Doppler colorido</h4>
+            <p>Avaliação vascular e obstétrica com estudo hemodinâmico.</p>
+          </div>
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=1200&auto=format&fit=crop" alt="Medicina Fetal" />
+            <div class="tag">Fetal</div>
+            <h4>Medicina Fetal</h4>
+            <p>Translucência nucal, morfológico e acompanhamento da gestação.</p>
+          </div>
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1200&auto=format&fit=crop" alt="Biópsias por ultrassom" />
+            <div class="tag">Procedimentos</div>
+            <h4>Biópsias guiadas por ultrassom</h4>
+            <p>Procedimentos minimamente invasivos com orientação por imagem.</p>
+          </div>
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" alt="Ultrassom 3D/4D" />
+            <div class="tag">3D/4D</div>
+            <h4>Ultrassom 3D e 4D</h4>
+            <p>Imagens em alta definição para registros especiais.</p>
+          </div>
+          <div class="card" data-animate>
+            <img class="service-img" src="https://images.unsplash.com/photo-1556125574-d7f27ec36a06?q=80&w=1200&auto=format&fit=crop" alt="Consultas" />
+            <div class="tag">Consultas</div>
+            <h4>Consultas</h4>
+            <p>Atendimento clínico por agenda com especialistas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="about">
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>Galeria</h3>
+          <p>Ambientes e procedimentos, imagens ilustrativas</p>
+        </div>
+        <div class="carousel" data-animate>
+          <div class="slides">
+            <img src="https://picsum.photos/seed/clinic1/1600/360" alt="Sala de exame" />
+            <img src="https://picsum.photos/seed/clinic2/1600/360" alt="Equipamentos de imagem" />
+            <img src="https://picsum.photos/seed/clinic3/1600/360" alt="Equipe em atendimento" />
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="especialidades">
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>Especialidades</h3>
+          <p>Linhas de cuidado com foco em cada fase da vida</p>
+        </div>
+        <div class="grid grid-4">
+          <div class="card" data-animate><h4>Medicina fetal</h4><p>Acompanhamento completo da gestação com protocolos atualizados.</p></div>
+          <div class="card" data-animate><h4>Ginecologia</h4><p>Rotina e investigação de sintomas com abordagem individualizada.</p></div>
+          <div class="card" data-animate><h4>Vascular</h4><p>Diagnóstico e seguimento de doenças venosas e arteriais.</p></div>
+          <div class="card" data-animate><h4>Imagem geral</h4><p>Exames de ultrassonografia para diferentes áreas do corpo.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>O que os pacientes dizem</h3>
+          <p>Experiências reais de quem passou por aqui</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card" data-animate><p class="quote">Fui muito bem atendida e recebi o laudo no mesmo dia. Equipe atenciosa e local agradável.<small>Paciente verificado</small></p></div>
+          <div class="card" data-animate><p class="quote">Profissionais extremamente cuidadosos. Explicaram cada etapa do exame com clareza.<small>Paciente verificado</small></p></div>
+          <div class="card" data-animate><p class="quote">Recepção rápida e facilidade para agendar pelo WhatsApp. Recomendo.<small>Paciente verificado</small></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contact">
+      <div class="container">
+        <div class="section-title" data-animate>
+          <h3>Contato</h3>
+          <p>Fale com a Clínica Radius pelos canais abaixo</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card" data-animate>
+            <h4>WhatsApp</h4>
+            <p>(54) 99253-6135</p>
+            <a class="btn btn-primary" href="https://wa.me/5554992536135" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          </div>
+          <div class="card" data-animate>
+            <h4>Telefone</h4>
+            <p>(54) 3045-5700</p>
+            <a class="btn btn-ghost" href="tel:+555430455700">Ligar agora</a>
+          </div>
+          <div class="card" data-animate>
+            <h4>Endereço</h4>
+            <p>R. Teixeira Soares, 839, Passo Fundo RS</p>
+            <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=R.+Teixeira+Soares%2C+839%2C+Passo+Fundo+RS" target="_blank" rel="noopener">Ver no mapa</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h5>Clínica Radius</h5>
+        <p>Ultrassonografia, medicina fetal e diagnóstico por imagem com atendimento acolhedor.</p>
+      </div>
+      <div>
+        <h5>Links</h5>
+        <ul class="list">
+          <li><span></span><a href="#sobre">Empresa</a></li>
+          <li><span></span><a href="#servicos">Serviços</a></li>
+          <li><span></span><a href="#galeria">Galeria</a></li>
+          <li><span></span><a href="#especialidades">Especialidades</a></li>
+          <li><span></span><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Atendimento</h5>
+        <p>Seg a Sex, 7h às 18h<br/> Sábados, 7h às 13h</p>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <p>WhatsApp (54) 99253-6135<br/> Fixo (54) 3045-5700</p>
+      </div>
+    </div>
+    <div class="container sub">© <span id="year"></span> Clínica Radius.>© <span id="year"></span> Clínica Radius. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    // menu móvel
+    const btn = document.getElementById('menuBtn');
+    const mobile = document.getElementById('mobileNav');
+    btn?.addEventListener('click', ()=>{
+      const open = mobile.hasAttribute('hidden') ? false : true;
+      if(open){ mobile.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+      else { mobile.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); }
+    });
+
+    // entrada on-scroll
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      })
+    },{threshold:.18});
+    document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+
+    // contadores
+    function animateCounter(el){
+      const target = parseFloat(el.dataset.count);
+      const isFloat = !Number.isInteger(target);
+      let current = 0;
+      const duration = 1400; // ms
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now - start)/duration,1);
+        const val = target * p*p*(3-2*p); // ease in-out
+        el.textContent = isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString('pt-BR');
+        if(p<1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick);
+    }
+    document.querySelectorAll('.num').forEach(animateCounter);
+
+    // ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
